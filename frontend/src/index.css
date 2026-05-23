@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyber-bg: #f8fafc;        /* Slate-50 background */
+  --color-cyber-card: #ffffff;      /* Pure white card backgrounds */
+  --color-cyber-border: #e2e8f0;    /* Slate-200 borders */
+  --color-cyber-border-glow: #cbd5e1; /* Slate-300 active highlight */
+  --color-cyber-primary: #4f46e5;   /* Vercel/Stripe Indigo-600 accent */
+  --color-cyber-secondary: #7c3aed; /* Violet-600 secondary accent */
+  --color-cyber-success: #10b981;   /* Emerald-500 safe green */
+  --color-cyber-warning: #f59e0b;   /* Amber-500 warning yellow */
+  --color-cyber-danger: #ef4444;    /* Red-500 emergency red */
+  --color-cyber-vip: #0ea5e9;       /* Sky-500 VIP tactical blue */
+  --color-cyber-text: #0f172a;      /* Slate-900 primary text */
+  --color-cyber-muted: #64748b;     /* Slate-500 muted text */
+
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-orbitron: 'Plus Jakarta Sans', sans-serif; /* Clean modern headers mapped to previous slot */
+
+  --shadow-glow: 0 8px 30px rgba(79, 70, 229, 0.08);
+  --shadow-glow-success: 0 8px 30px rgba(16, 185, 129, 0.08);
+  --shadow-glow-danger: 0 8px 30px rgba(239, 68, 68, 0.08);
+  --shadow-glow-warning: 0 8px 30px rgba(245, 158, 11, 0.08);
+  --shadow-glow-vip: 0 8px 30px rgba(14, 165, 233, 0.08);
+
+  --animate-pulse-glow: pulseGlow 2.5s infinite ease-in-out;
+  --animate-scanline: scanline 15s linear infinite;
+  --animate-flicker: flicker 0.15s infinite alternate;
+  --animate-radar-sweep: radarSweep 6s linear infinite;
+
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.5; filter: brightness(0.95); }
+    50% { opacity: 1; filter: brightness(1.05); }
+  }
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes flicker {
+    0% { opacity: 0.98; }
+    100% { opacity: 1; }
+  }
+  @keyframes radarSweep {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  
+  body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Elegant Slate Grid background representing high-end developer platforms */
+.tactical-scanlines {
+  position: relative;
+  overflow: hidden;
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Minimalist elegant radar sweep background */
+.radar-sweep-effect {
+  position: relative;
+}
+
+.radar-sweep-effect::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(79, 70, 229, 0.05) 0deg, rgba(79, 70, 229, 0.02) 90deg, transparent 180deg, transparent 360deg);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: radarSweep 8s linear infinite;
+}
+
+/* Premium translucent SaaS cards with smooth borders and soft elevations */
+.cyber-panel {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 25px rgba(148, 163, 184, 0.06);
+  backdrop-filter: blur(12px);
+  border-radius: 12px; /* Smoother, higher-end modern rounded look */
+}
+
+/* Custom Scrollbar for high-end SaaS dashboards */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+  border-left: 1px solid #e2e8f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}
+
+/* Subtly glowing color text indicators in light mode */
+.text-glow {
+  text-shadow: 0 2px 10px rgba(79, 70, 229, 0.15);
+}
+
+.text-glow-success {
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.15);
+}
+
+.text-glow-danger {
+  text-shadow: 0 2px 10px rgba(239, 68, 68, 0.15);
+}
+
+.text-glow-warning {
+  text-shadow: 0 2px 10px rgba(245, 158, 11, 0.15);
+}
+
+/* Modern clean pulsating dots */
+.glow-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.glow-dot::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.35;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
