@@ -8,6 +8,7 @@ from app.modules.vip.router import router as vip_router
 from app.modules.alerts.router import router as alerts_router
 from app.modules.cameras.router import router as cameras_router
 from app.modules.ai.router import router as ai_router
+from app.modules.dashboard.router import router as dashboard_router
 
 # Initialize database tables
 Base.metadata.create_all(bind=engine)
@@ -18,7 +19,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Set up CORS middleware
+# Setup up CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Adjust for production as needed
@@ -39,6 +40,7 @@ app.include_router(vip_router, prefix=api_prefix)
 app.include_router(alerts_router, prefix=api_prefix)
 app.include_router(cameras_router, prefix=api_prefix)
 app.include_router(ai_router, prefix=api_prefix)
+app.include_router(dashboard_router, prefix=api_prefix)
 
 @app.get("/")
 def read_root():

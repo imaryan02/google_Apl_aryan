@@ -49,20 +49,20 @@ def get_fallback_cv_metrics(video_path_or_url: str) -> dict:
     anomaly = "safe"
     
     url_lower = video_path_or_url.lower()
-    if "34190" in url_lower: # Gate A Main Turnstiles
+    if "34190" in url_lower or "ved1.mp4" in url_lower: # Gate A Main Turnstiles
         detected_count = 68
         density = 68.0
         movement_speed = "normal"
-    elif "34298" in url_lower: # VIP Lounge Entry
+    elif "34298" in url_lower or "ved2.mp4" in url_lower: # VIP Lounge Entry
         detected_count = 15
         density = 15.0
         movement_speed = "normal"
-    elif "34284" in url_lower: # South Stand Exit Bottleneck (heavy crowd!)
+    elif "34284" in url_lower or "ved3.mp4" in url_lower: # South Stand Exit Bottleneck (heavy crowd!)
         detected_count = 92
         density = 92.0
         movement_speed = "slow"
         anomaly = "gathering"
-    elif "34293" in url_lower: # Plaza North Concourse
+    elif "34293" in url_lower or "ved4.mp4" in url_lower: # Plaza North Concourse
         detected_count = 45
         density = 45.0
         movement_speed = "normal"
@@ -84,8 +84,17 @@ def analyze_video_feed(video_path_or_url: str, capacity: int) -> dict:
     local_path = video_path_or_url
     is_temp = False
     
-    # 1. Handle HTTP URL downloads
-    if video_path_or_url.startswith("http://") or video_path_or_url.startswith("https://"):
+    # 1. Resolve relative local URLs or localhost URLs to local file paths
+    filename = os.path.basename(video_path_or_url)
+    if "ved1.mp4" in video_path_or_url or "ved2.mp4" in video_path_or_url or "ved3.mp4" in video_path_or_url or "ved4.mp4" in video_path_or_url:
+        frontend_public = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'frontend', 'public')
+        possible_path = os.path.join(frontend_public, filename)
+        if os.path.exists(possible_path):
+            local_path = possible_path
+            logger.info(f"Resolved video URL {video_path_or_url} to local file: {local_path}")
+    
+    # 2. Handle HTTP URL downloads
+    if (video_path_or_url.startswith("http://") or video_path_or_url.startswith("https://")) and local_path == video_path_or_url:
         try:
             local_path = download_video(video_path_or_url)
             is_temp = True
@@ -93,7 +102,7 @@ def analyze_video_feed(video_path_or_url: str, capacity: int) -> dict:
             logger.error(f"Failed to download video feed: {e}")
             return get_fallback_cv_metrics(video_path_or_url)
             
-    # 2. Open Video Stream
+    # 3. Open Video Stream
     cap = cv2.VideoCapture(local_path)
     if not cap.isOpened():
         logger.error(f"OpenCV failed to open video file: {local_path}")

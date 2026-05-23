@@ -29,13 +29,13 @@ export const ZoneStatusCard: React.FC = () => {
         {zones.map((zone) => (
           <div 
             key={zone.id} 
-            className="border border-cyber-border/40 bg-cyber-bg/40 p-2.5 rounded-lg hover:border-cyber-border-glow transition-all flex flex-col gap-2 relative group"
+            id={`zone-${zone.code}`}
+            className="border border-white/10 bg-white/5 p-3 rounded-lg hover:border-cyber-primary/40 hover:bg-white/8 transition-all flex flex-col gap-2.5 relative group"
           >
-            {/* Sector Header */}
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs font-bold text-cyber-primary">{zone.code}</span>
-                <span className="text-[11px] font-sans text-cyber-text/80">{zone.name}</span>
+                <span className="text-xs font-sans text-cyber-text/90">{zone.name}</span>
               </div>
               
               <div className="flex items-center gap-1.5">
@@ -49,7 +49,6 @@ export const ZoneStatusCard: React.FC = () => {
               </div>
             </div>
 
-            {/* Density Metrics */}
             <div className="flex items-center justify-between text-[11px] font-mono mt-0.5">
               <div className="flex items-center gap-3">
                 <span className="text-cyber-muted uppercase">DENSITY:</span>
@@ -69,9 +68,8 @@ export const ZoneStatusCard: React.FC = () => {
               </div>
             </div>
 
-            {/* Progress Bar & Simulator */}
             <div className="flex items-center gap-3">
-              <div className="flex-1 bg-cyber-border/40 h-1.5 rounded-full overflow-hidden">
+              <div className="flex-1 bg-white/10 h-2 rounded-full overflow-hidden">
                 <div 
                   className={`h-full transition-all duration-500 ${getBarColor(zone.currentDensity)}`}
                   style={{ width: `${Math.min(100, zone.currentDensity)}%` }}
@@ -83,14 +81,14 @@ export const ZoneStatusCard: React.FC = () => {
                 <button
                   onClick={() => updateZoneDensity(zone.code, Math.max(0, zone.currentDensity - 5))}
                   title="Simulate Decreasing Crowd"
-                  className="bg-cyber-border hover:bg-cyber-primary/20 text-cyber-muted hover:text-cyber-primary border border-cyber-border-glow p-0.5 rounded-md active:scale-[0.9] transition-all"
+                  className="bg-white/8 hover:bg-cyber-primary/20 text-cyber-muted hover:text-cyber-primary border border-white/10 p-1 rounded-md active:scale-[0.9] transition-all"
                 >
                   <Minus size={10} />
                 </button>
                 <button
                   onClick={() => updateZoneDensity(zone.code, Math.min(100, zone.currentDensity + 5))}
                   title="Simulate Crowd Buildup"
-                  className="bg-cyber-border hover:bg-cyber-primary/20 text-cyber-muted hover:text-cyber-primary border border-cyber-border-glow p-0.5 rounded-md active:scale-[0.9] transition-all"
+                  className="bg-white/8 hover:bg-cyber-primary/20 text-cyber-muted hover:text-cyber-primary border border-white/10 p-1 rounded-md active:scale-[0.9] transition-all"
                 >
                   <Plus size={10} />
                 </button>

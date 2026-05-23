@@ -6,6 +6,7 @@ import {
   Network, ArrowRight, Lock, Unlock, AlertTriangle, 
   Gauge, Clock, Compass, Shield, Zap, RefreshCw, CheckCircle 
 } from 'lucide-react';
+import { API_BASE_URL } from '../../../shared/config/api';
 
 const ZONE_CODES = new Set(['ZONE_A', 'ZONE_B', 'ZONE_C', 'ZONE_D', 'ZONE_E', 'ZONE_F', 'ZONE_G', 'ZONE_H']);
 
@@ -94,7 +95,7 @@ export const SmartRoutingManager: React.FC = () => {
     setPathResult(null);
 
     try {
-      const response = await fetch('http://localhost:8000/api/routes/suggest', {
+      const response = await fetch(`${API_BASE_URL}/api/routes/suggest`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -25,7 +25,7 @@ export const EmergencyControlPanel: React.FC<PanelProps> = ({ className = '' }) 
         <div className={`p-3 border rounded-lg flex gap-3 items-start transition-all ${
           emergencyMode 
             ? 'border-cyber-danger bg-cyber-danger/15 animate-pulse shadow-glow-danger' 
-            : 'border-cyber-border bg-cyber-bg/40'
+            : 'border-white/10 bg-white/5'
         }`}>
           <div className="mt-0.5 shrink-0">
             {emergencyMode ? (
@@ -47,7 +47,7 @@ export const EmergencyControlPanel: React.FC<PanelProps> = ({ className = '' }) 
         </div>
 
         {/* Status of Emergency Evacuation Lanes */}
-        <div className="border border-cyber-border/40 bg-cyber-bg/20 p-2.5 rounded-lg flex flex-col gap-1.5 font-mono text-[9px]">
+        <div className="border border-white/10 bg-black/18 p-2.5 rounded-lg flex flex-col gap-1.5 font-mono text-[9px]">
           <span className="text-cyber-muted uppercase tracking-widest font-bold">EVACUATION TACTICAL ROUTES:</span>
           <div className="flex flex-col gap-1">
             {emergencyRoutes.map(route => (
@@ -65,7 +65,7 @@ export const EmergencyControlPanel: React.FC<PanelProps> = ({ className = '' }) 
         </div>
 
         {/* Physical Override Actuator Button */}
-        <div className="flex flex-col gap-2 pt-2 border-t border-cyber-border/30">
+        <div className="flex flex-col gap-2 pt-2 border-t border-white/10">
           {emergencyMode ? (
             <button
               onClick={toggleEmergencyMode}

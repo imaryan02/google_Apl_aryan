@@ -28,19 +28,19 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={`cyber-panel flex flex-col p-4 rounded-xl transition-all duration-300 ${glowClasses[glowColor]} ${className}`}
+      className={`cyber-panel flex flex-col p-4 transition-all duration-300 ${glowClasses[glowColor]} ${className}`}
       {...props}
     >
       {(title || headerAction) && (
-        <div className="flex items-center justify-between border-b border-cyber-border/40 pb-2 mb-3">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
           <div className="flex flex-col">
             {title && (
-              <h3 className="font-orbitron font-bold text-sm tracking-wider uppercase text-cyber-text">
+              <h3 className="font-orbitron font-bold text-sm tracking-wide text-cyber-text">
                 {title}
               </h3>
             )}
             {subtitle && (
-              <span className="text-[10px] text-cyber-muted font-mono tracking-tight uppercase">
+              <span className="text-[10px] text-cyber-muted font-mono tracking-wide uppercase">
                 {subtitle}
               </span>
             )}

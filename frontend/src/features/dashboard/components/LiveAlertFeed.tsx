@@ -46,7 +46,7 @@ export const LiveAlertFeed: React.FC<PanelProps> = ({ className = '' }) => {
     >
       <div className="flex flex-col gap-2.5">
         {activeAlerts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-12 text-cyber-muted font-mono gap-2 border border-dashed border-cyber-border/40 bg-cyber-bg/10 rounded-lg">
+          <div className="flex flex-col items-center justify-center py-12 text-cyber-muted font-mono gap-2 border border-dashed border-white/15 bg-white/5 rounded-lg">
             <CheckCircle className="h-8 w-8 text-cyber-success/60 shadow-glow-success" />
             <span className="text-[10px] tracking-wider uppercase">ALL SECTORS OPTIMAL</span>
           </div>
@@ -56,10 +56,10 @@ export const LiveAlertFeed: React.FC<PanelProps> = ({ className = '' }) => {
               key={alert.id}
               className={`flex items-start gap-3 p-3 border rounded-lg transition-all ${
                 alert.severity === 'critical' 
-                  ? 'border-cyber-danger/30 bg-cyber-danger/5 shadow-glow-danger' 
+                  ? 'border-cyber-danger/35 bg-cyber-danger/10 shadow-glow-danger' 
                   : alert.severity === 'high'
-                  ? 'border-cyber-danger/20 bg-cyber-bg/60'
-                  : 'border-cyber-border/60 bg-cyber-bg/40'
+                  ? 'border-cyber-danger/20 bg-white/6'
+                  : 'border-white/10 bg-white/5'
               }`}
             >
               {/* Alert Indicator */}
@@ -83,7 +83,7 @@ export const LiveAlertFeed: React.FC<PanelProps> = ({ className = '' }) => {
                 <div className="flex items-center justify-between mt-2 pt-2 border-t border-cyber-border/30">
                   <div className="flex items-center gap-2 font-mono text-[9px] text-cyber-muted">
                     <span className="text-cyber-primary">{alert.zoneCode}</span>
-                    <span>•</span>
+                    <span>/</span>
                     <span>{new Date(alert.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                   </div>
                   

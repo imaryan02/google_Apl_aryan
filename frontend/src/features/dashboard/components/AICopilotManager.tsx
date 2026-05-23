@@ -14,6 +14,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 import { Badge } from '../../../shared/components/Badge';
+import { API_BASE_URL } from '../../../shared/config/api';
 
 interface CopilotAction {
   type: string;
@@ -109,7 +110,7 @@ export const AICopilotManager: React.FC = () => {
       const targetAlert = alerts.find(a => a.id === alert_id || a.id.slice(0, 8) === alert_id || (alert_id === 'a1' && a.id === 'a1') || (alert_id === 'a2' && a.id === 'a2'));
       if (targetAlert) {
         try {
-          await fetch(`http://localhost:8000/api/alerts/${targetAlert.id}/resolve`, {
+          await fetch(`${API_BASE_URL}/api/alerts/${targetAlert.id}/resolve`, {
             method: 'PATCH'
           });
           resolveAlert(targetAlert.id);
@@ -149,7 +150,7 @@ export const AICopilotManager: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/ai/chat', {
+      const response = await fetch(`${API_BASE_URL}/api/ai/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: textToSend })
@@ -170,7 +171,7 @@ export const AICopilotManager: React.FC = () => {
 
         if (action.type === 'route_suggest' && action.zone_code) {
           try {
-            const routeRes = await fetch('http://localhost:8000/api/routes/suggest', {
+            const routeRes = await fetch(`${API_BASE_URL}/api/routes/suggest`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({

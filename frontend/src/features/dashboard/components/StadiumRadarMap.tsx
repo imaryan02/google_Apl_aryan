@@ -79,57 +79,56 @@ export const StadiumRadarMap: React.FC<RadarMapProps> = ({ className = '' }) => 
     if (isCritical) {
       return {
         fill: isHovered ? 'rgba(239, 68, 68, 0.16)' : 'rgba(239, 68, 68, 0.06)',
-        stroke: isHovered ? '#4f46e5' : '#ef4444',
+        stroke: isHovered ? '#31d7c6' : '#fb5a67',
       };
     }
     if (isWarning) {
       return {
         fill: isHovered ? 'rgba(245, 158, 11, 0.16)' : 'rgba(245, 158, 11, 0.05)',
-        stroke: isHovered ? '#4f46e5' : '#f59e0b',
+        stroke: isHovered ? '#31d7c6' : '#f6c453',
       };
     }
     return {
       fill: isHovered ? 'rgba(16, 185, 129, 0.12)' : 'rgba(16, 185, 129, 0.04)',
-      stroke: isHovered ? '#4f46e5' : '#10b981',
+      stroke: isHovered ? '#31d7c6' : '#34d399',
     };
   };
 
   const degToRad = (degrees: number) => (degrees * Math.PI) / 180;
 
   return (
-    <div className={`cyber-panel border border-cyber-border rounded-sm h-full flex flex-col relative bg-cyber-bg/95 overflow-hidden min-h-[400px] ${className}`}>
+    <div className={`cyber-panel h-full flex flex-col relative overflow-hidden min-h-[400px] ${className}`}>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(49,215,198,0.11),transparent_48%)] pointer-events-none"></div>
       
-      {/* HUD Header overlay info */}
-      <div className="absolute top-3 left-4 z-10 flex flex-col font-mono text-[9px] text-cyber-muted gap-0.5 pointer-events-none select-none">
-        <div className="flex items-center gap-1.5 text-cyber-primary font-bold text-[10px] tracking-wider uppercase font-orbitron">
+      <div className="absolute top-4 left-5 z-10 flex flex-col font-mono text-[9px] text-cyber-muted gap-0.5 pointer-events-none select-none">
+        <div className="flex items-center gap-1.5 text-cyber-primary font-bold text-[11px] tracking-wider uppercase font-orbitron">
           <Eye size={12} className="animate-pulse" />
-          <span>ACTIVE TACTICAL KONVA RADAR</span>
+          <span>Live Stadium Radar</span>
         </div>
-        <span>STAGE COMPILATION: REACT-KONVA 2D</span>
-        <span>SCAN RESOLUTION: 400x400 CONCENTRIC GRID</span>
-        <span>STATUS INTEGRITY: ONLINE (ACTIVE TELEMETRY)</span>
+        <span>8 sectors / CCTV telemetry / VIP route pins</span>
+        <span>Status integrity: online</span>
       </div>
 
-      <div className="absolute top-3 right-4 z-10 flex gap-2 pointer-events-none select-none">
+      <div className="absolute top-4 right-5 z-10 flex gap-2 pointer-events-none select-none">
         <Badge variant={emergencyMode ? 'red' : 'cyan'} pulse className="text-[9px] font-orbitron uppercase">
           {emergencyMode ? 'EVACUATION ACTIVE' : 'RADAR SWEEP ACTIVE'}
         </Badge>
       </div>
 
       {/* Main Canvas Area */}
-      <div className="flex-1 flex items-center justify-center relative p-8">
+      <div className="flex-1 flex items-center justify-center relative p-8 pt-14">
         <Stage width={400} height={400} className="w-[360px] h-[360px]">
           <Layer>
             
             {/* 1. Radar Grid Concentric Background Lines */}
-            <Circle x={CENTER_X} y={CENTER_Y} radius={RADAR_RADIUS} stroke="rgba(79, 70, 229, 0.06)" strokeWidth={1} />
-            <Circle x={CENTER_X} y={CENTER_Y} radius={ZONE_OUTER_R} stroke="rgba(79, 70, 229, 0.06)" strokeWidth={1} />
-            <Circle x={CENTER_X} y={CENTER_Y} radius={ZONE_INNER_R} stroke="rgba(79, 70, 229, 0.08)" strokeWidth={1} strokeDasharray={[4, 4]} />
-            <Circle x={CENTER_X} y={CENTER_Y} radius={45} stroke="rgba(79, 70, 229, 0.06)" strokeWidth={1} strokeDasharray={[2, 2]} />
+            <Circle x={CENTER_X} y={CENTER_Y} radius={RADAR_RADIUS} stroke="rgba(49, 215, 198, 0.15)" strokeWidth={1} />
+            <Circle x={CENTER_X} y={CENTER_Y} radius={ZONE_OUTER_R} stroke="rgba(49, 215, 198, 0.12)" strokeWidth={1} />
+            <Circle x={CENTER_X} y={CENTER_Y} radius={ZONE_INNER_R} stroke="rgba(49, 215, 198, 0.16)" strokeWidth={1} strokeDasharray={[4, 4]} />
+            <Circle x={CENTER_X} y={CENTER_Y} radius={45} stroke="rgba(49, 215, 198, 0.13)" strokeWidth={1} strokeDasharray={[2, 2]} />
             
             {/* Axis crosshair lines */}
-            <Line points={[CENTER_X - RADAR_RADIUS, CENTER_Y, CENTER_X + RADAR_RADIUS, CENTER_Y]} stroke="rgba(79, 70, 229, 0.06)" strokeWidth={1} />
-            <Line points={[CENTER_X, CENTER_Y - RADAR_RADIUS, CENTER_X, CENTER_Y + RADAR_RADIUS]} stroke="rgba(79, 70, 229, 0.06)" strokeWidth={1} />
+            <Line points={[CENTER_X - RADAR_RADIUS, CENTER_Y, CENTER_X + RADAR_RADIUS, CENTER_Y]} stroke="rgba(49, 215, 198, 0.10)" strokeWidth={1} />
+            <Line points={[CENTER_X, CENTER_Y - RADAR_RADIUS, CENTER_X, CENTER_Y + RADAR_RADIUS]} stroke="rgba(49, 215, 198, 0.10)" strokeWidth={1} />
 
             {/* 2. Concentric Sonar Scanner Sweeper */}
             <Shape
@@ -143,9 +142,9 @@ export const StadiumRadarMap: React.FC<RadarMapProps> = ({ className = '' }) => 
                 context.closePath();
                 
                 const grad = context.createRadialGradient(CENTER_X, CENTER_Y, 0, CENTER_X, CENTER_Y, RADAR_RADIUS);
-                grad.addColorStop(0, 'rgba(79, 70, 229, 0.06)');
-                grad.addColorStop(0.8, 'rgba(79, 70, 229, 0.02)');
-                grad.addColorStop(1, 'rgba(79, 70, 229, 0.0)');
+                grad.addColorStop(0, 'rgba(49, 215, 198, 0.16)');
+                grad.addColorStop(0.8, 'rgba(49, 215, 198, 0.04)');
+                grad.addColorStop(1, 'rgba(49, 215, 198, 0.0)');
                 
                 context.fillStyle = grad;
                 context.fillStrokeShape(shape);
@@ -218,8 +217,8 @@ export const StadiumRadarMap: React.FC<RadarMapProps> = ({ className = '' }) => 
             <Group listening={false}>
               {/* Inner Grass Pitch Ring */}
               <Shape
-                fill="rgba(241, 245, 249, 0.8)"
-                stroke="#cbd5e1"
+                fill="rgba(255, 255, 255, 0.08)"
+                stroke="rgba(255, 255, 255, 0.25)"
                 strokeWidth={1.5}
                 sceneFunc={(context, shape) => {
                   context.beginPath();
@@ -229,7 +228,7 @@ export const StadiumRadarMap: React.FC<RadarMapProps> = ({ className = '' }) => 
                 }}
               />
               <Shape
-                stroke="rgba(79, 70, 229, 0.12)"
+                stroke="rgba(49, 215, 198, 0.22)"
                 strokeWidth={1}
                 sceneFunc={(context, shape) => {
                   context.beginPath();
@@ -239,8 +238,8 @@ export const StadiumRadarMap: React.FC<RadarMapProps> = ({ className = '' }) => 
                 }}
               />
               {/* Core target crosshair center dot */}
-              <Circle x={CENTER_X} y={CENTER_Y} radius={8} stroke="rgba(79, 70, 229, 0.25)" strokeWidth={1} />
-              <Circle x={CENTER_X} y={CENTER_Y} radius={2} fill="#4f46e5" />
+              <Circle x={CENTER_X} y={CENTER_Y} radius={8} stroke="rgba(49, 215, 198, 0.38)" strokeWidth={1} />
+              <Circle x={CENTER_X} y={CENTER_Y} radius={2} fill="#31d7c6" />
             </Group>
 
             {/* 5. Glowing Route Overlays Flow (renders evacuation egress lines in emergency mode) */}
@@ -335,14 +334,14 @@ export const StadiumRadarMap: React.FC<RadarMapProps> = ({ className = '' }) => 
       </div>
 
       {/* Bottom map diagnostics coordinates */}
-      <div className="border-t border-cyber-border p-3 bg-cyber-card flex items-center justify-between font-mono text-[9px] text-cyber-muted pointer-events-none select-none">
+      <div className="border-t border-white/10 p-3 bg-black/20 flex items-center justify-between font-mono text-[9px] text-cyber-muted pointer-events-none select-none">
         <div className="flex items-center gap-1.5">
           <Crosshair size={10} className="text-cyber-primary" />
           <span>DEC-MATRIX FEED: OK</span>
         </div>
         <div className="flex items-center gap-3">
-          <span>LAT: 33.7490° N</span>
-          <span>LON: 84.3880° W</span>
+          <span>LAT: 33.7490 deg N</span>
+          <span>LON: 84.3880 deg W</span>
           <span className="text-cyber-primary">CCTV LINKS STABLE</span>
         </div>
       </div>

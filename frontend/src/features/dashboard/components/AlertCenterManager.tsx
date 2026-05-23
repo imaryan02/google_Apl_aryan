@@ -6,6 +6,7 @@ import {
   Bell, CheckCircle, XCircle, AlertTriangle, Clock, Search, 
   Radio, Cpu, History, Sparkles, Check 
 } from 'lucide-react';
+import { API_BASE_URL } from '../../../shared/config/api';
 
 export const AlertCenterManager: React.FC = () => {
   const { 
@@ -77,7 +78,7 @@ export const AlertCenterManager: React.FC = () => {
   const handleResolveAlert = async (alertId: string) => {
     setResolvingAlertId(alertId);
     try {
-      const res = await fetch(`http://localhost:8000/api/alerts/${alertId}/resolve`, {
+      const res = await fetch(`${API_BASE_URL}/api/alerts/${alertId}/resolve`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'

@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cyber-bg: #f8fafc;        /* Slate-50 background */
-  --color-cyber-card: #ffffff;      /* Pure white card backgrounds */
-  --color-cyber-border: #e2e8f0;    /* Slate-200 borders */
-  --color-cyber-border-glow: #cbd5e1; /* Slate-300 active highlight */
-  --color-cyber-primary: #4f46e5;   /* Vercel/Stripe Indigo-600 accent */
-  --color-cyber-secondary: #7c3aed; /* Violet-600 secondary accent */
-  --color-cyber-success: #10b981;   /* Emerald-500 safe green */
-  --color-cyber-warning: #f59e0b;   /* Amber-500 warning yellow */
-  --color-cyber-danger: #ef4444;    /* Red-500 emergency red */
-  --color-cyber-vip: #0ea5e9;       /* Sky-500 VIP tactical blue */
-  --color-cyber-text: #0f172a;      /* Slate-900 primary text */
-  --color-cyber-muted: #64748b;     /* Slate-500 muted text */
+  --color-cyber-bg: #080a0f;
+  --color-cyber-card: #11141c;
+  --color-cyber-border: #242936;
+  --color-cyber-border-glow: #3b465c;
+  --color-cyber-primary: #31d7c6;
+  --color-cyber-secondary: #a78bfa;
+  --color-cyber-success: #34d399;
+  --color-cyber-warning: #f6c453;
+  --color-cyber-danger: #fb5a67;
+  --color-cyber-vip: #38bdf8;
+  --color-cyber-text: #f7f8fb;
+  --color-cyber-muted: #98a2b3;
 
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-orbitron: 'Plus Jakarta Sans', sans-serif; /* Clean modern headers mapped to previous slot */
 
-  --shadow-glow: 0 8px 30px rgba(79, 70, 229, 0.08);
-  --shadow-glow-success: 0 8px 30px rgba(16, 185, 129, 0.08);
-  --shadow-glow-danger: 0 8px 30px rgba(239, 68, 68, 0.08);
-  --shadow-glow-warning: 0 8px 30px rgba(245, 158, 11, 0.08);
-  --shadow-glow-vip: 0 8px 30px rgba(14, 165, 233, 0.08);
+  --shadow-glow: 0 18px 60px rgba(49, 215, 198, 0.14);
+  --shadow-glow-success: 0 18px 60px rgba(52, 211, 153, 0.14);
+  --shadow-glow-danger: 0 18px 60px rgba(251, 90, 103, 0.16);
+  --shadow-glow-warning: 0 18px 60px rgba(246, 196, 83, 0.14);
+  --shadow-glow-vip: 0 18px 60px rgba(56, 189, 248, 0.14);
 
   --animate-pulse-glow: pulseGlow 2.5s infinite ease-in-out;
   --animate-scanline: scanline 15s linear infinite;
@@ -49,25 +49,26 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
   
   body {
-    background-color: #f8fafc;
-    color: #0f172a;
+    background-color: #080a0f;
+    color: #f7f8fb;
     font-family: 'Inter', sans-serif;
   }
 }
 
-/* Elegant Slate Grid background representing high-end developer platforms */
 .tactical-scanlines {
   position: relative;
   overflow: hidden;
-  background-color: #f8fafc;
+  background-color: #080a0f;
   background-image: 
-    linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+    radial-gradient(circle at 24% 8%, rgba(49, 215, 198, 0.14), transparent 32%),
+    radial-gradient(circle at 86% 16%, rgba(246, 196, 83, 0.1), transparent 28%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, 36px 36px, 36px 36px;
 }
 
 /* Minimalist elegant radar sweep background */
@@ -82,21 +83,22 @@
   left: 50%;
   width: 100%;
   height: 100%;
-  background: conic-gradient(from 0deg at 50% 50%, rgba(79, 70, 229, 0.05) 0deg, rgba(79, 70, 229, 0.02) 90deg, transparent 180deg, transparent 360deg);
+  background: conic-gradient(from 0deg at 50% 50%, rgba(49, 215, 198, 0.16) 0deg, rgba(49, 215, 198, 0.04) 95deg, transparent 180deg, transparent 360deg);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
   animation: radarSweep 8s linear infinite;
 }
 
-/* Premium translucent SaaS cards with smooth borders and soft elevations */
 .cyber-panel {
   position: relative;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 0 4px 25px rgba(148, 163, 184, 0.06);
-  backdrop-filter: blur(12px);
-  border-radius: 12px; /* Smoother, higher-end modern rounded look */
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)),
+    rgba(17, 20, 28, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+  border-radius: 8px;
 }
 
 /* Custom Scrollbar for high-end SaaS dashboards */
@@ -106,34 +108,34 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
-  border-left: 1px solid #e2e8f0;
+  background: #0b0d13;
+  border-left: 1px solid #242936;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #3b465c;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4f46e5;
+  background: #31d7c6;
 }
 
 /* Subtly glowing color text indicators in light mode */
 .text-glow {
-  text-shadow: 0 2px 10px rgba(79, 70, 229, 0.15);
+  text-shadow: 0 0 18px rgba(49, 215, 198, 0.34);
 }
 
 .text-glow-success {
-  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.15);
+  text-shadow: 0 0 18px rgba(52, 211, 153, 0.3);
 }
 
 .text-glow-danger {
-  text-shadow: 0 2px 10px rgba(239, 68, 68, 0.15);
+  text-shadow: 0 0 18px rgba(251, 90, 103, 0.34);
 }
 
 .text-glow-warning {
-  text-shadow: 0 2px 10px rgba(245, 158, 11, 0.15);
+  text-shadow: 0 0 18px rgba(246, 196, 83, 0.32);
 }
 
 /* Modern clean pulsating dots */

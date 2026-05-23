@@ -35,7 +35,7 @@ export const AgentRecommendationPanel: React.FC<PanelProps> = ({ className = '' 
     >
       <div className="flex flex-col gap-3">
         {pendingRecommendations.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-14 text-cyber-muted font-mono gap-2 border border-dashed border-cyber-border/40 bg-cyber-bg/10 rounded-sm">
+          <div className="flex flex-col items-center justify-center py-14 text-cyber-muted font-mono gap-2 border border-dashed border-white/15 bg-white/5 rounded-lg">
             <Shield className="h-7 w-7 text-cyber-primary/60 shadow-glow" />
             <span className="text-[9px] tracking-widest uppercase">SYS ADVISORY OPTIMAL</span>
             <span className="text-[8px] text-cyber-muted/60">No pending overrides required</span>
@@ -44,7 +44,7 @@ export const AgentRecommendationPanel: React.FC<PanelProps> = ({ className = '' 
           pendingRecommendations.map((rec) => (
             <div 
               key={rec.id}
-              className="border border-cyber-primary/20 bg-cyber-card/80 p-3 rounded-lg relative flex flex-col gap-2.5 transition-all shadow-glow hover:border-cyber-primary/50"
+              className="border border-cyber-primary/20 bg-cyber-primary/6 p-3 rounded-lg relative flex flex-col gap-2.5 transition-all shadow-glow hover:border-cyber-primary/50"
             >
               {/* Agent Badge Info */}
               <div className="flex justify-between items-center">
@@ -64,7 +64,7 @@ export const AgentRecommendationPanel: React.FC<PanelProps> = ({ className = '' 
                 <h4 className="font-orbitron font-bold text-xs text-cyber-text tracking-wide uppercase leading-snug">
                   {rec.summary}
                 </h4>
-                <p className="text-[10px] font-sans text-cyber-text/80 leading-relaxed bg-cyber-bg/30 p-2 rounded-lg border border-cyber-border/20">
+                <p className="text-[10px] font-sans text-cyber-text/80 leading-relaxed bg-black/20 p-2 rounded-lg border border-white/10">
                   {rec.recommendation}
                 </p>
               </div>
@@ -91,7 +91,7 @@ export const AgentRecommendationPanel: React.FC<PanelProps> = ({ className = '' 
               </div>
 
               {/* Operator Command Buttons (Human-in-the-Loop Override) */}
-              <div className="flex items-center gap-2 border-t border-cyber-border/40 pt-2.5 mt-1 justify-end">
+              <div className="flex items-center gap-2 border-t border-white/10 pt-2.5 mt-1 justify-end">
                 <span className="text-[8px] font-mono text-cyber-muted mr-auto uppercase tracking-tighter">OPERATOR VERDICT REQUIRED:</span>
                 <button
                   onClick={() => rejectRecommendation(rec.id)}

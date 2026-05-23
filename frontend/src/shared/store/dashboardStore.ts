@@ -43,6 +43,13 @@ interface DashboardState {
   deleteVip: (id: string) => void;
   syncAlert: (id: string, updates: Partial<Alert>) => void;
   syncRecommendation: (id: string, updates: Partial<AgentRecommendation>) => void;
+  setInitialState: (data: {
+    zones: Zone[];
+    routes: Route[];
+    alerts: Alert[];
+    vipMovements: VipMovement[];
+    agentRecommendations: AgentRecommendation[];
+  }) => void;
 }
 
 // Initial robust seed data for hackathon
@@ -416,6 +423,17 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
       };
       set({ agentRecommendations: [...recs, newRec] });
     }
+    get().recalculateGlobalRisk();
+  },
+
+  setInitialState: (data) => {
+    set({
+      zones: data.zones,
+      routes: data.routes,
+      alerts: data.alerts,
+      vipMovements: data.vipMovements,
+      agentRecommendations: data.agentRecommendations
+    });
     get().recalculateGlobalRisk();
   }
 }));

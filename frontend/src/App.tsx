@@ -7,13 +7,34 @@ import { VipMovementControlDeck } from './features/dashboard/components/VipMovem
 import { CCTVScannerManager } from './features/dashboard/components/CCTVScannerManager';
 import { AlertCenterManager } from './features/dashboard/components/AlertCenterManager';
 import { AICopilotManager } from './features/dashboard/components/AICopilotManager';
+import { API_BASE_URL } from './shared/config/api';
+import { useDashboardStore } from './shared/store/dashboardStore';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
 
   useEffect(() => {
     // Connect to local backend, fallback dynamically if needed
-    socketService.connect('http://localhost:8000');
+    socketService.connect(API_BASE_URL);
+
+    // Fetch initial state from backend REST API
+    const loadInitData = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/dashboard/init`);
+        if (res.ok) {
+          const data = await res.json();
+          useDashboardStore.getState().setInitialState(data);
+          console.log('[App] Initialized dashboard state from backend.');
+        } else {
+          console.warn('[App] Failed to fetch initial dashboard state. Using mockups.');
+        }
+      } catch (err) {
+        console.error('[App] Error fetching initial dashboard state:', err);
+      }
+    };
+
+    loadInitData();
+
     return () => {
       socketService.disconnect();
     };

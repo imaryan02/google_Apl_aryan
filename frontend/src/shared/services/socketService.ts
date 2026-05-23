@@ -4,13 +4,14 @@ import { useDashboardStore } from '../store/dashboardStore';
 import type { Route } from '../../core/types/route.types';
 import type { Alert } from '../../core/types/alert.types';
 import type { VipMovement } from '../../core/types/vip.types';
+import { API_BASE_URL } from '../config/api';
 
 
 class SocketService {
   private socket: Socket | null = null;
   private isConnected = false;
 
-  public connect(backendUrl: string = 'http://localhost:8000') {
+  public connect(backendUrl: string = API_BASE_URL) {
     if (this.socket) return;
 
     console.log(`[SocketService] Connecting to ${backendUrl}...`);

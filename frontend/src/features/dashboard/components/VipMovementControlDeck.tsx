@@ -26,6 +26,7 @@ import {
   BookOpen
 } from 'lucide-react';
 import type { VipMovement } from '../../../core/types/vip.types';
+import { API_BASE_URL } from '../../../shared/config/api';
 
 interface VipMovementControlDeckProps {
   className?: string;
@@ -155,14 +156,14 @@ export const VipMovementControlDeck: React.FC<VipMovementControlDeckProps> = ({ 
     try {
       let res;
       if (editingVip) {
-        res = await fetch(`http://localhost:8000/api/vip-movements/${editingVip.id}`, {
+        res = await fetch(`${API_BASE_URL}/api/vip-movements/${editingVip.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
       } else {
         const tempId = `vip-new-${Date.now()}`;
-        res = await fetch(`http://localhost:8000/api/vip-movements/`, {
+        res = await fetch(`${API_BASE_URL}/api/vip-movements/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: tempId, ...payload })
@@ -204,7 +205,7 @@ export const VipMovementControlDeck: React.FC<VipMovementControlDeckProps> = ({ 
   const handleDelete = async (vipId: string) => {
     if (!confirm('Are you sure you want to delete this convoy?')) return;
     try {
-      const res = await fetch(`http://localhost:8000/api/vip-movements/${vipId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/vip-movements/${vipId}`, {
         method: 'DELETE'
       });
       if (!res.ok) {
@@ -269,7 +270,7 @@ export const VipMovementControlDeck: React.FC<VipMovementControlDeckProps> = ({ 
   const guidance = generateRouteGuidance();
 
   return (
-    <div className={`flex flex-col gap-4 h-full p-4 overflow-y-auto ${className} bg-cyber-bg`}>
+    <div className={`flex flex-col gap-4 h-full p-4 overflow-hidden ${className} bg-cyber-bg`}>
       
       {/* Tactical Stats Top Ribbon */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 shrink-0">

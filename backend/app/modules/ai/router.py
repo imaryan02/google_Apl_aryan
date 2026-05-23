@@ -127,7 +127,7 @@ async def chat_with_copilot(payload: ChatRequest, db: Session = Depends(get_db))
     act_alert_id = None
     act_emerg = None
 
-    # Parse update_route
+    # 1. Parse update_route
     if "unblock" in q_lower or "open" in q_lower:
         for r in routes:
             if r.name.lower() in q_lower:
@@ -136,7 +136,7 @@ async def chat_with_copilot(payload: ChatRequest, db: Session = Depends(get_db))
                 act_route_status = "open"
                 resp_text = f"Command Agent: Processing request to open Route {r.name} to clear traffic."
                 break
-    if "block" in q_lower or "close" in q_lower:
+    elif "block" in q_lower or "close" in q_lower:
         for r in routes:
             if r.name.lower() in q_lower:
                 act_type = "update_route"
@@ -145,17 +145,8 @@ async def chat_with_copilot(payload: ChatRequest, db: Session = Depends(get_db))
                 resp_text = f"Command Agent: Restricting Route {r.name} to general access."
                 break
 
-    # Parse route_suggest / evacuate
-    if "evacuate" in q_lower or "route" in q_lower or "egress" in q_lower or "path" in q_lower:
-        for z in zones:
-            if z.code.lower() in q_lower or z.name.lower() in q_lower or z.code.split("_")[-1].lower() in q_lower:
-                act_type = "route_suggest"
-                act_zone_code = z.code
-                resp_text = f"Command Agent: Triggering dynamic Dijkstra egress calculations for Sector {z.code} ({z.name})."
-                break
-
-    # Parse emergency
-    if "emergency" in q_lower or "evacuate stadium" in q_lower or "evacuation alert" in q_lower:
+    # 2. Parse emergency override
+    elif "emergency" in q_lower or "evacuate stadium" in q_lower or "evacuation alert" in q_lower:
         act_type = "emergency"
         if "stop" in q_lower or "disable" in q_lower or "off" in q_lower or "clear" in q_lower or "deactivate" in q_lower:
             act_emerg = False
@@ -164,13 +155,22 @@ async def chat_with_copilot(payload: ChatRequest, db: Session = Depends(get_db))
             act_emerg = True
             resp_text = "Command Agent: CRITICAL OVERRIDE. Activating system-wide evacuation alerts and opening emergency lanes."
 
-    # Parse resolve_alert
-    if "resolve" in q_lower or "clear alert" in q_lower:
+    # 3. Parse resolve_alert
+    elif "resolve" in q_lower or "clear alert" in q_lower:
         for a in alerts:
             if a.id in query or a.id[:8] in query or a.zone_code.lower() in q_lower or a.alert_type in q_lower:
                 act_type = "resolve_alert"
                 act_alert_id = a.id
                 resp_text = f"Command Agent: Resolving alert [{a.title}] in Sector {a.zone_code}."
+                break
+
+    # 4. Parse route_suggest / evacuate (fallback only if no other match)
+    elif "evacuate" in q_lower or "route" in q_lower or "egress" in q_lower or "path" in q_lower:
+        for z in zones:
+            if z.code.lower() in q_lower or z.name.lower() in q_lower:
+                act_type = "route_suggest"
+                act_zone_code = z.code
+                resp_text = f"Command Agent: Triggering dynamic Dijkstra egress calculations for Sector {z.code} ({z.name})."
                 break
 
     # General Query fallback
