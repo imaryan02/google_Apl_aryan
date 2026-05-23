@@ -1,44 +1,219 @@
 # AI Stadium Command Center
 
-AI Stadium Command Center is a real-time stadium operations platform for crowd safety, route control, VIP movement coordination, alert response, CCTV zone monitoring, and AI-assisted operator recommendations.
+## Real-Time Crowd Intelligence and Stadium Operations Platform
 
-The system is designed around one operating principle: the core command center must work without AI, while AI adds analysis, recommendations, and explanations that require human operator approval before critical action.
+AI Stadium Command Center is a mission-control platform for large stadium events. It helps operators monitor crowd density, detect unsafe congestion, coordinate VIP movement, manage routes, respond to alerts, and use AI recommendations without giving AI unchecked control over critical safety actions.
 
-## Features
+The project is built around one core principle:
 
-- Real-time command dashboard for stadium health, occupancy, route status, and active alerts
-- Interactive stadium radar with monitored zones, risk states, VIP pins, and emergency overlays
-- Crowd density and movement-speed monitoring across CCTV-backed sectors
-- Smart route management for public, VIP, and emergency lanes
-- VIP movement control deck with primary and backup route assignments
-- Alert center for congestion, obstruction, stampede risk, and emergency incidents
-- AI recommendation panel with approve/reject operator workflow
-- Socket.IO event flow for live backend-to-frontend synchronization
-- FastAPI backend with SQLite fallback and PostgreSQL/Supabase support
+```txt
+Operational system first.
+AI intelligence second.
+Human approval always.
+```
+
+## The Problem
+
+Large stadiums become high-risk environments during matches, concerts, rallies, and public events. Operations teams often deal with:
+
+- crowd congestion near gates, corridors, and exits
+- delayed visibility into unsafe density buildup
+- blocked or overloaded evacuation routes
+- VIP movement conflicts with public crowd flow
+- disconnected CCTV, routing, alerting, and response systems
+- reactive decision-making during emergencies
+
+When these systems are fragmented, operators lose time. In a high-density venue, minutes matter.
+
+## The Solution
+
+AI Stadium Command Center brings stadium operations into one real-time command dashboard.
+
+It combines:
+
+- live zone monitoring
+- smart route control
+- emergency alert management
+- VIP movement planning
+- crowd risk prediction
+- AI-assisted operational recommendations
+- human-in-the-loop approvals
+
+The result is a safety-first platform that gives operators a clear, fast, and explainable view of what is happening inside the stadium.
+
+## Demo Story
+
+A critical crowd buildup appears in `ZONE_D` near the lower south deck.
+
+1. The system detects density above the critical threshold.
+2. Movement speed drops from normal to slow.
+3. A critical congestion alert is created.
+4. The radar map highlights the risky sector.
+5. The AI recommendation panel suggests opening alternate route `R-08`.
+6. The operator reviews the reasoning and approves the recommendation.
+7. Route status, zone risk, alerts, and the dashboard update in real time.
+
+This demonstrates the core value of the system: fast detection, clear visualization, AI-assisted response, and operator-controlled execution.
+
+## Key Features
+
+### Mission-Control Dashboard
+
+- real-time command overview
+- stadium health score
+- active alerts
+- occupancy load factor
+- route availability
+- VIP movement status
+- emergency override controls
+
+### Interactive Stadium Radar
+
+- 8 intelligent stadium zones
+- live risk color states
+- radar-style visual monitoring
+- VIP movement pins
+- emergency route overlays
+- sector click interactions
+
+### Crowd Monitoring and Risk Scoring
+
+- zone density tracking
+- movement speed monitoring
+- warning and critical thresholds
+- crowd health score calculation
+- congestion and stampede-risk indicators
+
+### Smart Routing
+
+- public, VIP, staff, and emergency route support
+- open, restricted, blocked, and reserved route states
+- alternate-route recommendations
+- emergency lane preservation
+- route capacity awareness
+
+### VIP Movement Coordination
+
+- VIP transit planning
+- primary and backup routes
+- security team assignment
+- convoy size and arrival tracking
+- route conflict awareness
+
+### Alert and Incident Management
+
+- congestion alerts
+- route blockage alerts
+- stampede-risk alerts
+- VIP conflict alerts
+- emergency incident alerts
+- active and resolved alert lifecycle
+
+### AI Recommendation Workflow
+
+AI agents analyze operational context and suggest actions, but they do not directly execute critical changes.
+
+Supported recommendation flow:
+
+```txt
+System detects risk
+AI analyzes context
+AI explains recommendation
+Operator approves or rejects
+System applies approved action
+```
+
+## Why This Project Stands Out
+
+| Area | What makes it strong |
+| --- | --- |
+| Safety | Predicts risk before incidents escalate |
+| AI | Uses AI as an explainable assistant, not an uncontrolled actor |
+| Operations | Combines zones, routes, VIPs, alerts, and emergency controls |
+| UX | Mission-control dashboard optimized for fast operator decisions |
+| Architecture | Modular backend with real-time event flow |
+| Trust | Human-in-the-loop design for critical safety actions |
+| Scalability | Designed for future CCTV, IoT, drones, and multi-stadium support |
+
+## System Architecture
+
+```txt
+Camera Feeds / Simulated CCTV
+        |
+        v
+Computer Vision and Crowd Analytics
+        |
+        v
+Zone Risk and Prediction Engine
+        |
+        v
+FastAPI Operational Backend
+        |
+        +--> Routes Module
+        +--> VIP Module
+        +--> Alerts Module
+        +--> Dashboard Module
+        +--> AI Recommendation Module
+        |
+        v
+Socket.IO Real-Time Events
+        |
+        v
+React Mission-Control Dashboard
+```
+
+## Human-in-the-Loop AI Model
+
+The platform is intentionally designed so the core system works even if AI is unavailable.
+
+AI is used for:
+
+- analyzing alerts
+- explaining risks
+- suggesting alternate routes
+- identifying VIP route conflicts
+- recommending emergency actions
+- translating complex telemetry into operator-friendly guidance
+
+Operators remain responsible for:
+
+- approving recommendations
+- rejecting unsafe suggestions
+- triggering emergency mode
+- changing route states
+- resolving incidents
+
+This makes the system safer, more reliable, and more realistic for real-world operations.
 
 ## Tech Stack
 
 ### Frontend
 
-- React 19
-- TypeScript
-- Vite
-- Tailwind CSS
-- Zustand
-- Socket.IO Client
-- Recharts
-- React Konva
-- Lucide React
+| Layer | Technology |
+| --- | --- |
+| Framework | React 19 |
+| Language | TypeScript |
+| Build Tool | Vite |
+| Styling | Tailwind CSS |
+| State | Zustand |
+| Real-Time | Socket.IO Client |
+| Radar Map | React Konva |
+| Charts | Recharts |
+| Icons | Lucide React |
 
 ### Backend
 
-- FastAPI
-- SQLAlchemy
-- Pydantic
-- Socket.IO
-- SQLite for local development
-- PostgreSQL/Supabase for production-style deployment
-- Google GenAI SDK for AI-assisted flows
+| Layer | Technology |
+| --- | --- |
+| API | FastAPI |
+| Language | Python |
+| Database ORM | SQLAlchemy |
+| Schemas | Pydantic |
+| Real-Time | Socket.IO |
+| Local Database | SQLite |
+| Production Database | PostgreSQL / Supabase |
+| AI SDK | Google GenAI |
+| Computer Vision Ready | OpenCV |
 
 ## Repository Structure
 
@@ -46,33 +221,116 @@ The system is designed around one operating principle: the core command center m
 .
 |-- backend/
 |   |-- app/
-|   |   |-- core/                 # Config, database, seed data, socket setup
-|   |   |-- modules/              # API modules for dashboard, zones, routes, VIP, alerts, AI
-|   |   `-- shared/               # Shared schemas
-|   |-- requirements.txt
-|   `-- Dockerfile
+|   |   |-- core/
+|   |   |   |-- config.py
+|   |   |   |-- database.py
+|   |   |   |-- models.py
+|   |   |   |-- seed.py
+|   |   |   `-- socket.py
+|   |   |-- modules/
+|   |   |   |-- ai/
+|   |   |   |-- alerts/
+|   |   |   |-- cameras/
+|   |   |   |-- dashboard/
+|   |   |   |-- prediction/
+|   |   |   |-- routes/
+|   |   |   |-- vip/
+|   |   |   `-- zones/
+|   |   `-- shared/
+|   |-- Dockerfile
+|   `-- requirements.txt
 |-- frontend/
 |   |-- src/
-|   |   |-- features/dashboard/   # Dashboard pages and operational panels
-|   |   |-- shared/               # Layout, reusable components, services, store
-|   |   `-- core/types/           # Shared TypeScript domain types
+|   |   |-- core/types/
+|   |   |-- features/dashboard/
+|   |   |-- shared/components/
+|   |   |-- shared/layouts/
+|   |   |-- shared/services/
+|   |   `-- shared/store/
 |   `-- package.json
 |-- AI_AGENT_FLOW.md
 |-- BACKEND_ARCHITECTURE.md
 |-- DATABASE_SCHEMA.md
 |-- frontend_architechture.md
 |-- product_requirement.md
-`-- verify_*.py                   # Backend verification scripts
+`-- verify_*.py
 ```
 
-## Prerequisites
+## Core Backend Modules
+
+| Module | Responsibility |
+| --- | --- |
+| Zones | stores zone capacity, density, movement speed, thresholds, and risk level |
+| Routes | manages route status, type, capacity, priority, and assigned teams |
+| VIP | tracks VIP arrival, convoy, security level, primary route, and backup route |
+| Alerts | creates, escalates, resolves, and stores operational alerts |
+| Prediction | calculates crowd risk using density, movement speed, and route constraints |
+| Cameras | maps CCTV sources to monitored zones |
+| AI | generates explainable recommendations for operators |
+| Dashboard | provides initial state and command-center data |
+
+## Real-Time Events
+
+The system is designed around predictable live events.
+
+Backend emits:
+
+```txt
+zone:update
+alert:new
+alert:resolved
+route:update
+vip:update
+agent:recommendation
+emergency:triggered
+```
+
+Frontend reacts by updating:
+
+- radar zone colors
+- zone telemetry cards
+- alert feed
+- route controls
+- VIP movement panels
+- AI recommendation queue
+- emergency state
+
+## Data Model
+
+The database is designed as the operational memory of the stadium.
+
+Main entities:
+
+- stadiums
+- zones
+- cameras
+- routes
+- security teams
+- VIP movements
+- alerts
+- incidents
+- agent recommendations
+- audit logs
+
+Important design rules:
+
+- every operational entity belongs to a stadium
+- alerts link back to zones
+- VIP movements reference primary and backup routes
+- AI recommendations link to alerts
+- operator approval is stored
+- critical actions should be auditable
+
+## Getting Started
+
+### Prerequisites
 
 - Node.js 20 or newer
 - npm
 - Python 3.11 or newer
 - pip
 
-## Backend Setup
+### 1. Start the Backend
 
 ```powershell
 cd backend
@@ -83,21 +341,19 @@ copy .env.example .env
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-The API will run at:
+Backend URL:
 
 ```txt
 http://localhost:8000
 ```
 
-FastAPI docs are available at:
+API docs:
 
 ```txt
 http://localhost:8000/docs
 ```
 
-By default, the backend can fall back to local SQLite. To use Supabase or PostgreSQL, set `DATABASE_URL` in `backend/.env`.
-
-## Frontend Setup
+### 2. Start the Frontend
 
 Open a second terminal:
 
@@ -107,13 +363,21 @@ npm install
 npm run dev
 ```
 
-The frontend will run at:
+Frontend URL:
 
 ```txt
 http://localhost:5173
 ```
 
-If the backend is not running on `http://localhost:8000`, create `frontend/.env` and set:
+### 3. Configure the Frontend API URL
+
+The frontend defaults to:
+
+```txt
+http://localhost:8000
+```
+
+To override it, create `frontend/.env`:
 
 ```env
 VITE_API_BASE_URL=http://localhost:8000
@@ -140,7 +404,7 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 ## Verification Scripts
 
-The repository includes Python verification scripts for major backend flows:
+Run these from the repository root while the backend is running:
 
 ```powershell
 python verify_alerts.py
@@ -150,15 +414,17 @@ python verify_vip.py
 python verify_vip_crud.py
 python verify_ai.py
 python verify_ai_copilot.py
+python verify_cv_engine.py
+python verify_unusual_activity.py
 ```
 
-Run these from the repository root while the backend is available.
+These scripts validate important backend flows such as alerts, CCTV simulation, AI assistance, VIP operations, prediction, and unusual activity detection.
 
 ## Environment Variables
 
 ### Backend
 
-Configured in `backend/.env`:
+Create `backend/.env`:
 
 ```env
 DATABASE_URL=sqlite:///./stadium.db
@@ -166,7 +432,7 @@ HOST=127.0.0.1
 PORT=8000
 ```
 
-For PostgreSQL/Supabase:
+For PostgreSQL or Supabase:
 
 ```env
 DATABASE_URL=postgresql://postgres:<password>@db.<project-ref>.supabase.co:5432/postgres
@@ -174,7 +440,7 @@ DATABASE_URL=postgresql://postgres:<password>@db.<project-ref>.supabase.co:5432/
 
 ### Frontend
 
-Configured in `frontend/.env`:
+Create `frontend/.env` only if the backend URL is different:
 
 ```env
 VITE_API_BASE_URL=http://localhost:8000
@@ -182,48 +448,62 @@ VITE_API_BASE_URL=http://localhost:8000
 
 ## API Overview
 
-The backend registers operational routes under `/api`:
-
-- `/api/dashboard`
-- `/api/zones`
-- `/api/routes`
-- `/api/vip`
-- `/api/alerts`
-- `/api/cameras`
-- `/api/ai`
-
-Socket.IO is used for live updates between the backend and frontend.
-
-## AI Workflow
-
-The AI layer is advisory. It can analyze operational data, identify risk, explain what is happening, and recommend actions such as route changes, alert escalation, VIP rerouting, or emergency preparation.
-
-Critical actions remain operator-controlled:
+The backend registers APIs under `/api`.
 
 ```txt
-AI recommends.
-Human reviews.
-Human approves or rejects.
-System executes approved operational change.
+/api/dashboard
+/api/zones
+/api/routes
+/api/vip
+/api/alerts
+/api/cameras
+/api/ai
 ```
 
-## Build
+## Example Operational Scenario
 
-To build the frontend for production:
-
-```powershell
-cd frontend
-npm run build
+```txt
+ZONE_D density reaches 88%
+        |
+        v
+Risk level becomes critical
+        |
+        v
+Alert center creates critical congestion alert
+        |
+        v
+AI recommends opening Route R-08
+        |
+        v
+Operator approves recommendation
+        |
+        v
+Route opens, alert resolves, crowd health improves
 ```
 
-The compiled frontend output is generated in `frontend/dist`.
+## Future Scope
 
-## Deployment Notes
+- live CCTV stream ingestion
+- YOLOv8 people detection
+- drone and IoT sensor integration
+- mobile app for security teams
+- multi-stadium command center
+- full audit log dashboard
+- automatic incident timeline generation
+- advanced graph-based route optimization
+- predictive crowd surge forecasting
 
-- `backend/Dockerfile` can be used to containerize the FastAPI service.
-- `firebase.json` is present for frontend hosting workflows.
-- Configure production CORS, database credentials, and API base URLs before deploying.
+## Built For
 
-## Current Status
+This project is ideal for:
 
-This project is an operational prototype for an AI-assisted stadium command center. The core data model, dashboard UI, backend API modules, real-time event structure, and verification scripts are present and ready for continued iteration.
+- stadium security teams
+- event operations centers
+- emergency response coordinators
+- smart city safety systems
+- sports venues
+- concerts and large public gatherings
+
+## Final Positioning
+
+AI Stadium Command Center is a real-time operational intelligence platform for stadium safety. It combines live crowd monitoring, predictive risk analysis, smart routing, VIP coordination, emergency response, and human-approved AI recommendations into one command-center experience.
