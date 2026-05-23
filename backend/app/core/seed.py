@@ -3,6 +3,19 @@ from app.core.database import SessionLocal, engine, Base
 from app.core import models
 import uuid
 
+def seed_db_if_empty():
+    Base.metadata.create_all(bind=engine)
+
+    db: Session = SessionLocal()
+    try:
+        has_stadium = db.query(models.Stadium).first()
+        if has_stadium:
+            return
+    finally:
+        db.close()
+
+    seed_db()
+
 def seed_db():
     # Make sure all tables are created
     Base.metadata.create_all(bind=engine)

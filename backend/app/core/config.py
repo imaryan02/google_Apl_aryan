@@ -7,6 +7,7 @@ load_dotenv()
 class Settings:
     PROJECT_NAME: str = "AI Stadium Command Center API"
     API_V1_STR: str = "/api"
+    CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "*")
     
     # Fallback to local SQLite stadium.db if no PostgreSQL DATABASE_URL is set
     _db_url: str = os.getenv("DATABASE_URL", "sqlite:///./stadium.db")
